@@ -1,3 +1,4 @@
+using DataModels;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//builder.Services.AddDbContext
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<FitnessDbContext>(options => options.UseSqlServer(connectionString, p => p.MigrationsAssembly("FitnessStudioBackend")));
 
 var app = builder.Build();
 
